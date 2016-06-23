@@ -10,7 +10,7 @@ matrix:
    # Covers Java 8, Oracle JDK
    - jdk: oraclejdk8
      env: ANDROID_HOME=$HOME/android-sdk-linux
-     before_install: cd $HOME; curl -s https://storage.googleapis.com/zxing-build/android-sdk-linux.tar.bz2 | bunzip2 | tar xvf -
+     before_install: curl -s https://storage.googleapis.com/zxing-build/android-sdk-linux.tar.bz2 | bunzip2 | tar xvf - -C $HOME
 cache:
   directories:
     - $HOME/.m2
