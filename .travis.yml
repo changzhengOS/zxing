@@ -1,5 +1,8 @@
 language: java
 sudo: false
+env:
+  - ANDROID_HOME=$HOME/android-sdk-linux
+before_install: if [ ! -d "$HOME/android-sdk-linux" ]; then cd $HOME; curl -s https://storage.googleapis.com/zxing-build/android-sdk-linux.tar.bz2 | bunzip2 | tar xf - ; fi
 install: mvn -T 2 -Ptravis -DskipTests=true -B -V install
 script: mvn -T 2 -Ptravis ${JACOCO} test
 matrix:
@@ -12,6 +15,7 @@ matrix:
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/android-sdk-linux
 git:
   depth: 10
 after_success: if [ -n "$JACOCO" ]; then bash <(curl -s https://codecov.io/bash); fi
